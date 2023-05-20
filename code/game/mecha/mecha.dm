@@ -7,6 +7,7 @@
 #define MECHA_TIME_TO_ENTER 4 SECOND
 #define TIME_TO_RECALIBRATION 10 SECOND
 
+
 #define RANGE_MELEE 1
 #define RANGED 2
 
@@ -235,6 +236,12 @@
 /obj/mecha/proc/range_action(atom/target)
 	return
 
+/obj/mecha/proc/in_mech(mob/user)
+	var/last_time = world.time
+	if(user != occupant)
+		to_chat(world,"[last_time - world.time]")
+		return FALSE
+	return TRUE
 
 //////////////////////////////////
 ////////  Movement procs  ////////
@@ -919,6 +926,7 @@
 			to_chat(usr, "[src.occupant] was faster. Try better next time, loser.")
 	else
 		to_chat(usr, "You stop entering the exosuit.")
+
 	return
 
 /obj/mecha/proc/moved_inside(mob/living/carbon/human/H)
@@ -928,12 +936,13 @@
 		src.occupant = H
 		add_fingerprint(H)
 		forceMove(src.loc)
-		log_append_to_last("[H] moved in as pilot.")
+		loga_append_to_last("[H] moved in as pilot.")
 		log_admin("[key_name(H)] has moved in [src.type] with name [src.name]")
 		src.icon_state = reset_icon()
 		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', VOL_EFFECTS_MASTER)
 		GrantActions(H, human_occupant = 1)
+		ADD_TRAIT(occupant,IN_MECH,src)
 		if(!hasInternalDamage())
 			occupant.playsound_local(null, 'sound/mecha/nominal.ogg', VOL_EFFECTS_MASTER, null, FALSE)
 		return 1
@@ -1017,6 +1026,7 @@
 	if(ishuman(occupant))
 		mob_container = src.occupant
 		RemoveActions(occupant, human_occupant = 1)
+		REMOVE_TRAIT(mob_container,IN_MECH,src)
 	else if(isbrain(occupant))
 		var/mob/living/carbon/brain/brain = occupant
 		RemoveActions(brain)
