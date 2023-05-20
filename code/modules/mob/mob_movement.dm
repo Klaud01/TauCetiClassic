@@ -212,7 +212,7 @@
 		SEND_SIGNAL(mob, COMSIG_CLIENTMOB_POSTMOVE, n, direct)
 
 /mob/proc/random_move()
-	if(isturf(loc) && !isspaceturf(loc) || (canmove && !incapacitated()))
+	if(isturf(loc) && !isspaceturf(loc) || (canmove && !incapacitated()) && !HAS_TRAIT(src,IN_MECH))
 		step(src, pick(cardinal))
 
 /mob/proc/SelfMove(turf/n, direct)
