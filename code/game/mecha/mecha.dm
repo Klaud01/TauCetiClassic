@@ -11,6 +11,7 @@
 #define RANGE_MELEE 1
 #define RANGED 2
 
+#define IN_MECH "in_mech"
 
 /obj/mecha
 	name = "Mecha"
