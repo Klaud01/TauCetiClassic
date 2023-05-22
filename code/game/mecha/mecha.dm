@@ -943,7 +943,7 @@
 		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', VOL_EFFECTS_MASTER)
 		GrantActions(H, human_occupant = 1)
-		ADD_TRAIT(occupant,IN_MECH,src)
+		ADD_TRAIT(H,IN_MECH,src)
 		if(!hasInternalDamage())
 			occupant.playsound_local(null, 'sound/mecha/nominal.ogg', VOL_EFFECTS_MASTER, null, FALSE)
 		return 1
