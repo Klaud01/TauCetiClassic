@@ -930,7 +930,7 @@
 		src.occupant = H
 		add_fingerprint(H)
 		forceMove(src.loc)
-		loga_append_to_last("[H] moved in as pilot.")
+		log_append_to_last("[H] moved in as pilot.")
 		log_admin("[key_name(H)] has moved in [src.type] with name [src.name]")
 		src.icon_state = reset_icon()
 		set_dir(dir_in)
