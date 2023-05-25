@@ -237,13 +237,6 @@
 /obj/mecha/proc/range_action(atom/target)
 	return
 
-/obj/mecha/proc/in_mech(mob/user)
-	var/last_time = world.time
-	if(user != occupant)
-		to_chat(world,"[last_time - world.time]")
-		return FALSE
-	return TRUE
-
 //////////////////////////////////
 ////////  Movement procs  ////////
 //////////////////////////////////
